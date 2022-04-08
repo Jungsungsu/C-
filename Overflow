@@ -1,0 +1,19 @@
+using System;
+
+namespace Overflow
+{
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            // uint의 최대, 4294967295
+            uint a = uint.MaxValue;
+
+            Console.WriteLine(a);
+
+            a = a + 1;
+
+            Console.WriteLine(a);
+        }
+    }
+}
