@@ -1,0 +1,30 @@
+using System;
+
+namespace IntegralConversion
+{
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            sbyte a = 127;
+            Console.WriteLine(a);
+
+            int b = (int)a;
+            Console.WriteLine(b);
+
+            int x = 128;
+            Console.WriteLine(a);
+
+            sbyte y = (sbyte)x;  // 오버플로우가 발생합니다.
+            Console.WriteLine(y);
+
+        }
+    }
+}
+// 형식 변환 : 변수를 다른 데이터 형식의 변수에 옮겨 담는 
+// 형식 변환 5가지
+// : 1.크기(표현 범위)가 서로 다른 정수 형식 사이의 변환
+//   2.크기(표현 범위)가 서로 다른 부동 소수점 형식 사이의 변환
+//   3.부호 있는 정수 형식과 부호 없는 정수 형식 사이의 변환
+//   4.부동 소수점 형식과 정수 형식 사이의 변환
+//   5.문자열과 숫자 사이의 변환
