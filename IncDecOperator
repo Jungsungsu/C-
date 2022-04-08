@@ -1,0 +1,21 @@
+using System;
+
+namespace IncDecOperator
+{
+    class MainApp
+
+    {
+        static void Main(string[] args)
+        {
+            int a = 10;
+            Console.WriteLine(a++);
+            Console.WriteLine(++a);
+
+            Console.WriteLine(a--);
+            Console.WriteLine(--a);
+        }
+    }
+}
+
+// 증가 연산자 :  피연산자의 값을 1 증가시킵니다.
+// 감소 연산자 : 피연산자의 값을 1 감소시킵니다.
