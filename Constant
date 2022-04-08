@@ -1,0 +1,17 @@
+using System;
+
+namespace Constant
+{
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            const int MAX_INT = 2147483647;
+            const int MIN_INT = 2137483648;
+
+            Console.WriteLine(MAX_INT);
+            Console.WriteLine(MIN_INT);
+        }
+    }
+}
+// 상수 선언 형식 : const 자료형 상수명 = ;
