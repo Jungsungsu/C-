@@ -1,0 +1,33 @@
+using System;
+
+namespace IfElse
+{
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("숫자를 입력하세요. : ");
+
+            string input = Console.ReadLine();
+            int number = Int32.Parse(input);
+
+            if (number < 0)
+                Console.WriteLine("음수");
+            else if (number > 0)
+                Console.WriteLine("양수");
+            else
+                Console.WriteLine("0");
+
+            if (number % 2 == 0)
+                Console.WriteLine("짝수");
+            else
+                Console.WriteLine("홀수");
+        }
+    }
+}
+// 분기문 : 프로그램의 흐름을 조건에 따라 여러 갈래로 나누는 흐름 제어 구문
+// 조건식 형식 : if(조건식)
+//                참인경우에_실행할_코드
+
+
+
