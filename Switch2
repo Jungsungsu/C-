@@ -1,0 +1,49 @@
+using System;
+
+namespace Switch2
+{
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            object obj = null;
+
+            string s = Console.ReadLine();
+            if (int.TryParse(s, out int out_i))
+                obj = out_i;
+            else if (float.TryParse(s, out float out_f))
+                obj = out_f;
+            else
+                obj = s;
+
+            switch (obj)
+            {
+                case int i:
+                    Console.WriteLine($"{i}는 int 형식입니다.");
+                    break;
+                case float f:
+                    Console.WriteLine($"{f}는 float 형식입니다.");
+                    break;
+                default:
+                    Console.Write($"{obj}는 모르는 형식입니다.");
+                    break;
+            }
+        }
+    }
+}
+
+// Switch문
+// object obj = 123; // C# 컴파일러는 123 리터럴을 평가하여 int 형식임을 유추합니다. 그리고 obj 안에 박싱해 넣습니다.
+//
+// switch(obj)
+// {
+//     case int i: // obj에 담겨져 있는 데이터의 형식이 int이므로 프로그램은 이 case절을 따라 분기합니다.
+//         ...
+//         break;
+//     case float f:
+//         ...
+//         break;
+//     default:
+//         ...
+//         break;
+// }
