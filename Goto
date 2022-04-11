@@ -1,0 +1,21 @@
+using System;
+
+namespace Goto
+{
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("종료 조건(숫자)을 입력하세요 :");
+
+            string input = Console.ReadLine();
+
+            int input_number = Convert.ToInt32(input);
+        }
+    }
+}
+
+// goto문 : 점프문 중에서도 가장 터프한 점프문
+// goto 레이블;
+// 레이블 :        // 레이블을 선언할 때는 콜(:)을 붙입니.
+//    // 이어지는 코드
