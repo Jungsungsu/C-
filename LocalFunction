@@ -1,0 +1,31 @@
+using System;
+
+namespace LocalFunction
+{
+    class MainApp
+    {
+        static string ToLowerString(string input)
+        {
+            var arr = input.ToCharArray();
+            for(int i =0; i<arr.Length; i++)
+            {
+                arr[i] = ToLowerChar(i);
+            }
+
+            char ToLowerChar(int i) // 로컬 함수 선언
+            {
+                if (arr[i] < 65 || arr[i] > 90) // A~Z의 ASCII 값 : 65~90
+                    return arr[i]; // arr[i] : ToLowerString() 메소드의 지역변수 arr을 사용합니다.
+                else
+                    return (char)(arr[i] + 32); // arr[i] : ToLowerString() 메소드의 지역변수 arr을 사용합니다.
+            }
+            return new string(arr);
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine(ToLowerString("Hello!"));
+            Console.WriteLine(ToLowerString("Good Morning."));
+            Console.WriteLine(ToLowerString("This is C#."));
+        }
+    }
+}
