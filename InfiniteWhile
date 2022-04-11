@@ -1,0 +1,18 @@
+using System;
+
+namespace InfiniteWhile
+{
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            int i = 0;
+            while(true)
+                Console.WriteLine(i++);
+        }
+    }
+}
+
+// while(true)
+//     // 반복 실행할 코드 블록
+
