@@ -1,0 +1,21 @@
+using System;
+
+namespace ForEach
+{
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = new int[]{0,1,2,3,4};
+
+            foreach(int a in arr)
+            {
+                Console.WriteLine(a);
+            }
+        }
+    }
+}
+
+// foreach문
+// foreach(데이터형식 변수명 in 배열_또는_컬렉)
+//      코드_또는_코드블록
