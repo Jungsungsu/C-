@@ -1,0 +1,26 @@
+using System;
+
+namespace NullCoalescing
+{
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            int? num = null;
+            Console.WriteLine($"{num ?? 0}");
+
+            num = 99;
+            Console.WriteLine($"{num ?? 0}");
+
+            string str = null;
+            Console.WriteLine($"{str ?? "Default"}");
+
+            str = "Specific";
+            Console.WriteLine($"{str ?? "Default"}");
+
+        }
+    }
+}
+
+// Null 병합 연산자
+// ?? : Null 조건부 연산자처럼 프로그램에서 종종 필요한 변수/객체의 Null 검사를 간결하게 만들어주는 역할을 .
