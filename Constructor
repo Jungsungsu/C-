@@ -1,0 +1,71 @@
+using System;
+
+namespace Constructor
+{
+    class Cat
+    {
+        public Cat()
+        {
+            Name = "";
+            Color = "";
+        }
+
+        public Cat(string _Name, string _Color)
+        {
+            Name = _Name;
+            Color = _Color;
+        }
+
+        ~Cat()
+        {
+            Console.WriteLine($"{Name} : 잘가");
+        }
+
+        public string Name;
+        public string Color;
+
+        public void Meow()
+        {
+            Console.WriteLine($"{Name} : 야옹");
+        }
+    }
+
+    class MainApp
+    { 
+        static void Main(string[] args)
+        {
+            Cat kitty = new Cat("키티", "하얀색");
+            kitty.Meow();
+            Console.WriteLine($"{kitty.Name} : {kitty.Color}");
+
+            Cat nero = new Cat("네로", "검은색");
+            nero.Meow();
+            Console.WriteLine($"{nero.Name} : {nero.Color}");
+        }
+    }
+}
+
+// 생성자 : 클래스와 이름이 같고, 반환형식이 없고 임무는 해당 형식(클래스)의 객체를 생성하는 것
+// 생성자 선언형식
+// class 클래스이름
+// {
+//     한정자 클래스이름(매개변수 목록) --> 생성
+//     {
+//         //
+//     }
+//
+//     // 필드
+//     // 메소드
+// }
+
+// 종료자 : 이름은 클래스 이름 앞에 ~를 붙인꼴, 종료자는 생성자와는 달리 매개 변수도 없고, 한정자도 사용하지 않음.
+// 종료자 선언형식
+// class 클래스이름
+// {
+//    ~클래스이름()  --> 종료 
+//    {
+//        //
+//    }
+//    // 필드
+//    // 메소드
+// }
