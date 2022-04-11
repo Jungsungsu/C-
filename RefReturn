@@ -1,0 +1,39 @@
+using System;
+
+namespace RefReturn
+{
+    class product
+    {
+        private int price = 100;
+
+        public ref int Getprice()
+        {
+            return ref price;
+        }
+
+        public void PrintPrice()
+        {
+            Console.WriteLine($"Price : {price}");
+        }
+    }
+
+    class MainApp
+    { 
+        static void Main(string[] args)
+        {
+            product carrot = new product();
+            ref int ref_local_price = ref carrot.Getprice(); // ref_local_price를 수정하면 carrot.price의 내용도 바뀐다.
+            int normal_local_price = carrot.Getprice();
+
+            carrot.PrintPrice();
+            Console.WriteLine($"Ref Local Price : {ref_local_price}");
+            Console.WriteLine($"Normal Local Price : {normal_local_price}");
+
+            ref_local_price = 200;
+
+            carrot.PrintPrice();
+            Console.WriteLine($"Ref Local Price : {ref_local_price}");
+            Console.WriteLine($"Normal Local Price: {normal_local_price}");
+        }
+    }
+}
