@@ -1,0 +1,70 @@
+using System;
+
+namespace PropertiesInInterface
+{
+    interface INamedValue
+    {
+        string Name
+        {
+            get;
+            set;
+        }
+
+        string Value
+        {
+            get;
+            set;
+        }
+    }
+
+    class NamedValue : INamedValue
+    {
+        public string Name
+        {
+            get;
+            set;
+        }
+
+        public string Value
+        {
+            get;
+            set;
+        }
+    }
+
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            NamedValue name = new NamedValue()
+            { Name = "이름", Value = "박상현" };
+
+            NamedValue height = new NamedValue()
+            { Name = "키", Value = "177Cm" };
+
+            NamedValue weight = new NamedValue()
+            { Name = "몸무9", Value = "90Kg" };
+
+            Console.WriteLine($"{name.Name} : {name.Value}");
+            Console.WriteLine($"{height.Name} : {height.Value}");
+            Console.WriteLine($"{weight.Name} : {weight.Value}");
+        }
+    }
+}
+
+// 인터페이스의 프로퍼티
+// 인터페이스의 프로퍼티 선언형식
+// interface 인터페이스이름
+// {
+//      public 형식 프로퍼티이름1
+//      {
+//          get; set;
+//      }
+//
+//      public 형식 프로퍼티이름2
+//      {
+//          get; set;
+//      }
+//
+//      // ...
+// }
