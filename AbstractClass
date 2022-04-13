@@ -1,0 +1,45 @@
+using System;
+
+namespace AbstractClass
+{
+    abstract class AbstractBase
+    {
+        protected void PrivateMethodA()
+        {
+            Console.WriteLine("AbstractBase.PrivateMethodA()");
+        }
+
+        public void PublicMethodA()
+        {
+            Console.WriteLine("AbstractBase.PublicMethodA()");
+        }
+
+        public abstract void AbstractMethodA();
+    }
+
+    class Derived : AbstractBase
+    {
+        public override void AbstractMethodA()
+        {
+            Console.WriteLine("Derived.AbstractMethod()");
+            PrivateMethodA();
+        }
+    }
+
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            AbstractBase obj = new Derived();
+            obj.AbstractMethodA();
+            obj.PublicMethodA();
+        }
+    }
+}
+
+// 추상 클래스 : 인터페이스와 클래스 사이
+// 추상 클래스 선언 문법
+// abstract class 클래스이름
+// {
+//      // 클래스와 동일하게 구현
+// }
