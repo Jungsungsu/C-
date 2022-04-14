@@ -42,7 +42,7 @@ namespace Indexer
         {
             MyList list = new MyList();
         for (int i = 0; i < 5; i++)
-            list[i] = i; // 배열을 다루듯 인덱스를 통해 데이터를 입 
+            list[i] = i; // 배열을 다루듯 인덱스를 통해 데이터를 입력
 
         for (int i = 0; i < list.Length; i++)
             Console.WriteLine(list[i]); // 데이터를 얻어올 때도 인덱스를 이용
