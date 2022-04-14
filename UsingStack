@@ -1,0 +1,26 @@
+using System;
+using System.Collections;
+
+namespace UsingStack
+{
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            Stack stack = new Stack();
+            stack.Push(1);
+            stack.Push(2);
+            stack.Push(3);
+            stack.Push(4);
+            stack.Push(5);
+
+            while (stack.Count > 0)
+                Console.WriteLine(stack.Pop());
+        }
+    }
+}
+
+// Stack : Queue와는 반대로 먼저 들어온 데이터가 나중에 나가고, 나중에 들어온 데이터는 먼저 나가는 구조의 컬렉션 입니다.
+// Stack 메소드 종류
+// 1.Push() 메소드 : 데이터를 넣을때, 데이터를 위에 쌓는다 
+// 2.Pop() 메소드 : 데이터를 꺼낼때, 제일 위에 쌓여 있는 데이터를 꺼낸다
