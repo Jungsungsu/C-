@@ -1,0 +1,47 @@
+using System;
+using System.Collections;
+
+namespace UsingList
+{
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            ArrayList list = new ArrayList();
+            for (int i = 0; i < 5; i++)
+                list.Add(i);
+
+            foreach (object obj in list)
+                Console.Write($"{obj} ");
+            Console.WriteLine();
+
+            list.RemoveAt(2);
+
+            foreach (object obj in list)
+                Console.Write($"{obj} ");
+            Console.WriteLine();
+
+            list.Insert(2, 2);
+
+            foreach (object obj in list)
+                Console.Write($"{obj} ");
+            Console.WriteLine();
+
+            list.Add("abc");
+            list.Add("def");
+
+            for (int i = 0; i < list.Count; i++)
+                Console.Write($"{list[i]} ");
+            Console.WriteLine();
+        }
+    }
+}
+
+// 컬렉션 : 같은 성격을 띄는 데이터의 모음을 담는 자료 구조를 말한다.
+// .NET 프레임워크의 클래스 : 1.ArrayList 2.Queue 3.Stack 4.Hashtable
+// ArrayList : 컬렉션을 생성할 때 용량을 미리 지정할 필요가 없이 필요에 따라 자동으로 그 용량이 늘어나거나 줄어드는 장점이 있음
+// ArrayList의 가장 중요한 메소드 : Add(), RemoveAt(), Insert()
+// Add() 메소드 : 컬렉션의 가장 마지막에 있는 요소 뒤에 새 요소를 추가한다.
+// RemoveAt() 메소드 : 특정 인덱스에 있는 요소를 제거한다.
+// Insert() 메소드 : 원하는 위치에 새 요소를 삽입한.
+
