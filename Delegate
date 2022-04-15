@@ -1,0 +1,42 @@
+using System;
+
+namespace Delegate
+{
+    delegate int MyDelegate(int a, int b); // 대리자의 선 
+
+    class Calculator
+    {
+        public int Plus(int a, int b) // 대리자는 인스턴스 메소드도 참조할 수 있고
+        {
+            return a + b;
+        }
+
+        public static int Minus(int a, int b) // 대리자는 정적 메소드도 참조할 수 있습니다.
+        {
+            return a - b;
+        }
+    }
+
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            Calculator Calc = new Calculator();
+            MyDelegate Callback;
+
+            Callback = new MyDelegate( Calc.Plus );
+            Console.WriteLine(Callback(3, 4));
+
+            Callback = new MyDelegate(Calculator.Minus);
+            Console.WriteLine(Callback(7, 5));
+        }
+    }
+}
+
+// 대리자는 delegate 키워드를 이용해서 선언한다.
+// 한정자 delegate 반환 형식 대리자이름 ( 매개 변수_목록 );
+
+// 대리자를 이용하여 콜백을 구현하는 과정
+// 1. 대리자를 선언한다.
+// 2. 대리자의 인스턴스를 생성한다. 인스턴스를 생성할 때는 대리자가 참조할 메소드를 매개 변수로 넘긴다.
+// 3. 대리자를 호출한다.
