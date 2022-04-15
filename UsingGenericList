@@ -1,0 +1,37 @@
+using System;
+using System. Collections.Generic;
+
+namespace UsingGenericList
+{
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            List<int> list = new List<int>();
+            for (int i = 0; i < 5; i++)
+                list.Add(i);
+
+            foreach (int element in list)
+                Console.Write($"{element} ");
+            Console.WriteLine();
+
+            list.RemoveAt(2);
+
+            foreach (int element in list)
+                Console.Write($"{element} ");
+            Console.WriteLine();
+
+            list.Insert(2, 2);
+
+            foreach (int element in list)
+                Console.Write($"{element} ");
+            Console.WriteLine();
+        }
+    }
+}
+
+// 일반화 컬렉션
+// System.Collections.Generic 네임 스페이스는 다양한 컬렉션 클랙스를 담고 있지, 지면의 한계상 대표적인 내 가지 클래스만 다룬.
+// 1. List<T> 2. Queue<T> 3. Stack<T> 4. Dictionary<TKey,TValue>
+
+// List<T> : 비일반화 클래스인 ArrayList 같은 기능을 한다.
