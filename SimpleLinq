@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace SimpleLinq
+{
+    class Profile
+    {
+        public string Name { get; set; }
+        public int Height { get; set; }
+    }
+
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            Profile[] arrProfile =
+            {
+                new Profile(){Name="정우성", Height=186},
+                new Profile(){Name="김태희", Height=158},
+                new Profile(){Name="고현정", Height=172},
+                new Profile(){Name="이문세", Height=178},
+                new Profile(){Name="하하", Height=171}
+            };
+
+            var profiles = from profile in arrProfile
+                           where profile.Height < 175
+                           orderby profile.Height
+                           select new
+                           {
+                               Name = profile.Name,
+                               InchHeight = profile.Height * 0.393
+                           };
+
+            foreach (var profile in profiles)
+                Console.WriteLine($"{profile.Name}, {profile.InchHeight}");
+        }
+    }
+}
+
+// where절 : 한마디로 필터 역할을 하는 연산자
+// orderby절 : 데이터의 정렬을 수행하는 연산자
+// select문 : from 절에서 데이터 원본으로부터 범위 변수를 뽑아내고 where 절에서 이 범위 변수의 조건을 검사한 후, 그 결과를 orderby절에서 정렬하고 select문을 이용해서 최종 결과를 추출해 낸다.
+
+
+
