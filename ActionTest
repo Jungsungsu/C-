@@ -1,0 +1,37 @@
+using System;
+
+namespace ActionTest
+{
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            Action act1 = () => Console.WriteLine("Action()");
+            act1();
+
+            int result = 0;
+            Action<int> act2 = (x) => result = x * x; // 람다식 밖에서 선언한 result에 x*x의 결과를 저장합니다.
+
+            act2(3);
+            Console.WriteLine($"result : {result}");
+
+            Action<double, double> act3 = (x, y) =>
+                {
+                    double pi = x / y;
+                    Console.WriteLine($"Action<T1,T2>({x},{y}) : {pi}");
+                };
+
+            act3(22.0, 7.0);
+        }
+    }
+}
+
+// Action 대리자 : Func 대리자와 거의 똑같지만 다른점은 Action 대리자는 반환 형식이 없습니다.
+// Action 대리자의 .NET 프레임워크 선언 형식
+// 1. public delegate void Action<>()
+// 2. public delegate void Action<in T>(T arg)
+// 3. public delegate void Action<in T1, in T2>(T1 arg1, T2 arg2)
+// 4. public delegate void Action<in T1, in T2, in T3>(T1 arg1, T2 arg2, T3 arg3)
+// 5. public delegate void Action<in T1, in T2, in T3, ..., in T14, in T15>(T1 arg1, T2 arg2, T3 arg3, ..., T14 arg14, T15 arg15)
+// 6. public delegate void Action<in T1, in T2, in T3, ..., in T14, in T15, in T16>(T1 arg1, T2 arg2, T3 arg3, ..., T14 arg14, T15 arg15, T16 arg16)
+
