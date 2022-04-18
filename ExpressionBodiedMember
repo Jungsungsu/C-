@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+
+namespace ExpressionBodiedMember
+{
+    class FriendList
+    {
+        private List<string> list = new List<string>();
+
+        // 여기에 나머지 멤버 구현
+        public void Add(string name) => list.Add(name);
+        public void Remove(string name) => list.Remove(name);
+        public void PrintAll()
+        {
+            foreach (var s in list)
+                Console.WriteLine(s);
+        }
+        // 생성자와 종료자 식으로 구현
+        public FriendList() => Console.WriteLine("FriendList()"); // 생성자
+        ~FriendList() => Console.WriteLine("~FriendList()"); // 종료자
+
+        // public int Capacity => list.Capacity; // 읽기 전용
+
+        public int Capacity // 속성
+        {
+            get => list.Capacity; // 읽기 전용 속성
+            set => list.Capacity = value; // 읽기 전용 인덱스 속성
+        }
+
+        // public string this[int index] => list[index]; // 읽기 전용
+        public string this[int index]
+        {
+            get => list[index];
+            set => list[index] = value;
+        }
+    }
+
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            FriendList obj = new FriendList();
+            obj.Add("Eeny");
+            obj.Add("Meeny");
+            obj.Add("Miny");
+            obj.Remove("Eeny");
+            obj.PrintAll();
+
+            Console.WriteLine($"{obj.Capacity}");
+            obj.Capacity = 10;
+            Console.WriteLine($"{obj.Capacity}");
+
+            Console.WriteLine($"{obj[0]}");
+            obj[0] = "Moe";
+            obj.PrintAll();
+        }
+    }
+}
+
+// 식으로 이루어지는 멤버
+// 식 본문 멤버의 문법
+// 멤버 => 식;
