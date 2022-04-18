@@ -1,0 +1,29 @@
+using System;
+using System.Linq;
+
+namespace From
+{
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            int[] numbers = { 9, 2, 6, 4, 5, 3, 7, 8, 1, 10 };
+
+            var result = from n in numbers // n : 범위 변수 , numbers : 데이터 원본
+                         where n % 2 == 0 // where 절 이하는 지금은 신경 안써도 됌.
+                         orderby n
+                         select n;
+
+            foreach (int n in result)
+                Console.WriteLine($"짝수 : {n}");
+        }
+    }
+}
+
+// LINQ : From
+// --> 모든 LINQ 쿼리식은 반드시 from 절로 시작
+// --> 쿼리식의 대상이 될 데이터 원본과 데이터 원본 안에 들어 있는 각 요소 데이터를 나타내는 범위 변수를 from절에 지정해줘야함.
+// --> 이 때 from의 데이터 원본은 아무 형식이나 사용할 수 없고, IEnumerable<T> 인터페이스를 상속하는 형식이어야 합니다.
+// --> 배열이나 컬렉션 객체들은 IEnumerable<T>를 상속하기 때문에 이들은 모두 from 절의 데이터 원본으로 사용할 수 있다.
+
+
