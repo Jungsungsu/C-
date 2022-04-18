@@ -1,0 +1,33 @@
+using System;
+
+namespace StatementLambda
+{
+    class MainApp
+    {
+        delegate string Concatenate(string[] args);
+
+        static void Main(string[] args)
+        {
+            Concatenate concat =   // 매개 변수가 없는 경우에는 ()에 아무것도 넣지 않는다.
+                (arr) =>
+                {
+                    string result = "";
+                    foreach (string s in arr)
+                        result += s;
+
+                    return result;
+                }; // 문장 형식 람다식은 {와 }로 둘러쌉니다.
+
+        Console.WriteLine( concat(args) );
+        }
+    }
+}
+
+// 문 형식의 람다식 : => 연산자의 오른편에 식 대신 {와 }로 둘러싸인 코드 블록이 위치한다.
+// 문 형식의 람다식 형식
+// (매개_변수_목록) => {
+//                  문장1;
+//                  문장2;
+//                  문장3;
+//                  ...
+//                  }
