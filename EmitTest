@@ -1,0 +1,73 @@
+using System;
+using System.Reflection;
+using System.Reflection.Emit;
+
+namespace EmitTest
+{
+    public class MainApp
+    {
+        public static void Main()
+        {
+            AssemblyBuilder newAssembly =
+                AppDomain.CurrentDomain.DefineDynamicAssembly( // CurrentDomain 프로퍼티는 현재 코드가 실행되고 있는 AppDomin을 반환합니다.
+                new AssemblyName("CalculatorAssembly"),
+                AssemblyBuilderAccess.Run);
+
+            ModuleBuilder newModule = newAssembly.DefineDynamicModule(
+                                      "Calculator");
+            TypeBuilder newType = newModule.DefineType("Sum1To100");
+
+            MethodBuilder newMethod = newType.DefineMethod(
+                "Calculate",
+                MethodAttributes.Public,
+                typeof(int),    // 반환 형식
+                new Type[0]);   // 매개 변수
+
+            ILGenerator generator = newMethod.GetILGenerator();
+
+            generator.Emit(OpCodes.Ldc_I4, 1); // 32비트 정수(1)를 계산 스택에 넣습니다.
+
+            for (int i = 2; i <= 100; i++)
+            {
+                generator.Emit(OpCodes.Ldc_I4, i); // 32비트 정수(i)를 계산 스택에 넣습니다.
+                generator.Emit(OpCodes.Add); // 계산 후 계산 스택에 담겨 있는 두 개의 값을 꺼내서 더한 후, 그 결과를 다시 계산 스택에 넣습니다.
+            }
+
+            generator.Emit(OpCodes.Ret); // 계산 스택에 담겨 있는 값을 반환합니다.
+            newType.CreateType();
+
+            object sum1To100 = Activator.CreateInstance(newType);
+            MethodInfo Calculate = sum1To100.GetType().
+            GetMethod("Calculate");
+            Console.WriteLine(Calculate.Invoke(sum1To100, null));
+        }
+    }
+}
+
+// 형식 내보내기
+// -Emit 클래스-
+//      클래스                             설명
+//  AssemblyBuider              동적 어셈블리를 정의하고 나타냅니다.
+//  ConstructorBuilder          동적으로 만든 클래스의 생성자를 정의하고 나타낸다.
+//  CustomAttributeBuilder      사용자 정의 애트리뷰트를 만듭니다.
+//  EnumBuilder                 열거 형식을 정의하고 나타냅니다.
+//  EventBuilder                클래스의 이벤트를 정의하고 나타냅니다.
+//  FieldBuilder                필드를 정의하고 나타냅니다.
+//  GenericTypeParameterBuilder 동적으로 정의된 형식(클래스)과 메소드를 위한 일반화 형식 매개변수를 정의하고 생성합니다.
+//  ILGenerator                 MSIL 명령어를 생성합니다.
+//  LocalBuilder                메소드나 생정자 내의 지역 변수를 나타냅니다.
+//  MethodBuilder               동적으로 만든 클래스의 메소드(또는 생성자)를 정의하고 나타냅니다.
+//  ModuleBuilder               동적 어셈블리 내의 모듈을 정의하고 나타냅니다.
+//  OpCodes                     ILGenerator 클래스의 멤버를 이용한 내보내기 작업에 사용할 MSIL 명령어의 필드 표현을 제공합니다.
+//  ParameterBuilder            매개 변수 정보를 생성하거나 결합시킵니다.
+//  PropertyBuilder             형식(클래스)의 프로퍼티를 정의합니다.
+//  TypeBuilder                 실행 중에 클래스를 정의하고 생성합니다.
+
+// 클래스를 사용하는 요령
+// 1. AssmblyBuilder를 이용해서 어셈블리를 만듭니다.
+// 2. ModuleBuilder를 이용해서 1에서 생성한 어셈블리 안에 모듈을 만들어 넣습니다.
+// 3. TypeBuilder를 2에서 생성한 모듈 안에 클래스(형식)를 만들어 넣습니다.
+// 4. 3에서 생성한 클래스 안에 메소드(MethodBuilder 이용)나 프로퍼티(PropertyBuilder 이용)를 만들어 넣습니다.
+// 5. 4에서 생성한 것이 메소드라면, ILGenerator를 이용해서 메소드 안에 CPU가 실행할 IL 명령들을 넣습니다.
+
+
