@@ -1,0 +1,66 @@
+// --- 53개의 표준 LINQ 연산 메소드 ---
+//     종류      메소드 이름              설명                                       C# 쿼리식 문법
+//     정렬      orderBy         오름차순으로 값을 정렬                                 orderby
+//          orderByDescending   내림차순으로 값을 정렬                                orderby ..., descending
+//              ThenBy          오름차순으로 2차 정렬 수행                             orderby ..., ...
+//          ThenByDescending    내림차순으로 2차 정렬 수행                             order by ..., descending ...
+//              Reverse         컬렉션 요소의 순서를 거꾸로 뒤집습니다
+//     집합      Distinct        중복 값을 제거합니다.
+//              Except          두 컬렉션 사이의 차집합을 반환
+//             Intersect        두 컬렉션 사이의 교집합을 반환
+//             Union            두 컬렉션 사이의 합집합을 반환
+//     필터링    OfType           메소드의 형식 매개 변수로 형식 변환이 가능한 값들만 추출
+//             Where            필터링할 조건을 평가하는 함수를 통과하는 값들만 추출	          Where
+//   수량 연산     All            모든 요소가 임의의 조건을 모두 만족시키는지를 평가
+//               Any            모든 요소 중 단 하나의 요소라도 임의의 조건을 만족시키는지 평가
+//             Contains         명시한 요소가 포함되어 있는지를 평가합니다.
+//  데이터 추출   Select           값을 추출하여 시퀀스를 만듭니다.                          Select
+//             SelectMany       여러 개의 데이터 원본으로부터 값을 추출하여 하나의 시퀀스를 생성
+//  데이터 분할   Skip             시퀀스에서 지정한 위치까지 요소들을 건너뜁니다.
+//             SkipWhile        입력된 조건 함수를 만족시키는 요소들을 건너뜁니다.
+//             Take             시퀀스에서 지정한 요소까지 요소들을 취합니다.
+//             TakeWhile        입력된 조건 함수를 만족시키는 요소들을 취합니다.
+//  데이터 결합   Join             공통 특성을 가진 서로 다른 두 개의 데이터 소스의 객체를 연결   join ..., in ..., on ..., equals ...
+//             GroupJoin        기본적으로 Join 연산자와 같은 일을 하되, 조인 결과를 그룹으로  join ..., in ..., on ..., equals ..., into ...
+//                              만들어 넣습니다.
+// 데이터 그룹화   GroupBy         공통된 특성을 공유하는 요소들을 각 그룹으로 묶습니다.
+//             ToLockup         키(Key) 선택 함수를 이용하여 골라낸 요소들을 Lookup 형식의
+//                              객체에 삽입
+//    생성     DefaultIfEmpty    빈 컬렉션을 기본값이 할당된 싱클턴 컬렉션으로 바꾼다.
+//             Empty            비어 있는 컬렉션을 반환
+//             Range            일정 범위의 숫자 시퀀스를 담고 있는 컬렉션을 생성
+//             Repeat           같은 값이 반복되는 컬렉션을 생성
+// 동등 여부 평가 SequenceEqual    두 시퀀스가 서로 일치하는지를 평가
+//  요소 접근    ElementAt        컬렉션으로부터 임의의 인덱스에 존재하는 요소를 반환
+//           ElementAtOrDefault 컬렉션으로부터 임의의 인덱스에 존재하는 요소를 반환하되, 반환할
+//                              값이 없으면 기본값을 반환
+//            First             컬렉션의 첫 번째 요소를 반환
+//            FirstOrDefault    First 연산자와 같은 기능을 하되, 반환할 값이 없는 경우 기본값
+//                              반환
+//            Last              컬렉션의 마지막 요소를 반환
+//            LastOrDefault     Last 연산자와 같은 기능을 하되, 반환할 값이 없는 경우 기본값을
+//                              반환
+//            Single            컬렉션의 유일한 요소를 반환
+//            SingleOrDefault   Single 연산자와 같은 기능을 하되, 반환할 값이 없거나 유일한
+//                              값이 아닐 경우 주어진 기본값을 반환
+//  형식 변환	  AsEnumerable      매개 변수를 IEnumerable<<Of <(T)> 형식 변환하여 반환
+//            AsQueryable       (일반화) IEnumerable 객체를 (일반환) IQueryable 형식
+//                              으로 반환
+//            Cast              컬렉션의 요소들을 특정 형식으로 변환                      범위 변수를 선언할 때 명시적으로 형식을 지정하면 된다.
+//             ofType           특정 형식으로 형식 변환할 수 있는 값만을 걸러냅니다.
+//            ToArray           컬렉션을 배열로 변환합니다. 이 메소드는 강제로 쿼리 실행
+//            ToDictionary      키 선택 함수에 근거해서 컬렉션의 요소를 Dictionary <(Of <(
+//                              TKey, TValue >)>)에 삽입
+//            ToList            컬렉션을 List<(Of <(T)>)>) 형식으로 변환
+//            ToLockup          키 선택 함수에 근거해서 컬렉션의 요소를 Lockup<(Of <(TKey,
+//                              TElement>)>)에 삽입
+//   연결      Concat            두 시퀀스를 하나의 시퀀스로 연결
+//   집계      Aggregate         컬렉션의 각 값에 대해 사용자가 정의한 집계 연산을 수행
+//            Average           컬렉션의 각 값에 대한 평균을 계산
+//            Count             컬렉션에서 조건에 부합하는 요소의 개수를 셉니다.
+//            LongCount         Count와 동일한 기능을 하지만, 매우 큰 컬렉션을 대상으로 한다는
+//                              점이 다름
+//             Max              컬렉션에서 가장 큰 값을 반환
+//             Min              컬렉션에서 가장 작은 값을 반환
+//             Sum              컬렉션 내의 값의 합을 계산
+
