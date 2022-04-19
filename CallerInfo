@@ -1,0 +1,34 @@
+using System;
+using System.Runtime.CompilerServices;
+
+namespace CallerInfo
+{
+    public static class Trace
+    {
+        public static void WriteLine(string message,
+            [CallerFilePath] string file = "",
+            [CallerLineNumber] int line = 0,
+            [CallerMemberName] string member = "")
+        {
+            Console.WriteLine(
+                $"{file}(Line:{line}) {member}: {message}");
+        }
+    }
+
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            Trace.WriteLine("즐거운 프로그래밍!");
+        }
+    }
+}
+
+// 애트리뷰트 : 코드에 대한 부가 정보를 기록하고 읽을 수 있는 기능
+// 호출자 정보 애트리뷰트
+//      애트리뷰트                                       설명
+//  CallerMemberNameAttribute       현재 메소드를 호출한 메소드 또는 프로퍼티의 이름을 나타냅니다.
+//  CallerFilePathAttribute         현재 메소드가 호출된 소스 파일 경로를 나타냅니다.
+//  CallerLineNumberAttribute       현재 메소드가 호출된 소스 파일 내의 (Line) 번호를 나타냅니다.
+
+
