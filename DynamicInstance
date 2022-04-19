@@ -1,0 +1,63 @@
+using System;
+using System.Reflection;
+
+namespace DynamicInstance
+{
+    class Profile
+    {
+        private string name;
+        private string phone;
+        public Profile()
+        {
+            name = ""; phone = "";
+        }
+
+        public Profile(string name, string phone)
+        {
+            this.name = name;
+            this.phone = phone;
+        }
+
+        public void Print()
+        {
+            Console.WriteLine($"{name}, {phone}");
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        public string Phone
+        {
+            get { return phone; }
+            set { phone = value; }
+        }
+    }
+
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            Type type = Type.GetType("DynamicInstance.Profile");
+            MethodInfo methodInfo = type.GetMethod("Print");
+            PropertyInfo nameProperty = type.GetProperty("Name"); // Type.GetProperties() 메소드는 그 형식의 모든 프로퍼티를 PropertyInfo 형식의 배열로 반환하지만, Type.GetProperty() 메소드는 특정 이름의 프로퍼티를 찾아 그 프로퍼티의 정보를 담은 하나의 PropertyInfo 객체만을 반환합니다.
+            PropertyInfo phoneProperty = type.GetProperty("Phone");
+
+            object profile = Activator.CreateInstance(type, "박상현", "512-1234");
+
+            methodInfo.Invoke(profile, null); // null 매개 변수가 오는 자리에는 Invoke() 메소드가 호출할 메소드의 매개 변수가 와야 합니다. 여기에서는 Profile.Print() 메소드의 매개변수가 없으므로 null을 넘기는 것입니다.
+
+            profile = Activator.CreateInstance(type);
+            nameProperty.SetValue(profile, "박찬호", null);
+            phoneProperty.SetValue(profile, "997-5511", null);
+
+            Console.WriteLine("{0}, {1}",
+                nameProperty.GetValue(profile, null),
+                phoneProperty.GetValue(profile, null));
+        }
+    }
+}
+
+// 리플렉션을 이용해서 객체 생성하고 이용하기
