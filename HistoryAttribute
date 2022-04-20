@@ -1,0 +1,74 @@
+using System;
+
+namespace HistoryAttribute
+{
+    [System.AttributeUsage(System.AttributeTargets.Class,
+    AllowMultiple=true)]
+    class History : System.Attribute
+    {
+        private string programmer;
+        public double version;
+        public string changes;
+
+        public History(string programmer) // History : 생성자
+        {
+            this.programmer = programmer;
+            version = 1.0;
+            changes = "First release";
+        }
+
+        public string GetProgrammer()
+        {
+            return programmer;
+        }
+    }
+
+    [History("Sean",
+        version = 0.1, changes = "2017-11-01 Created class stub" )]
+    [History("Bob",
+        version = 0.2, changes = "2017-12-03 Added Func() Method")] // 현재로서는 애트리뷰트를 이렇게 겹쳐 사용할 수 없습니다.
+    class MyClass
+    {
+        public void Func()
+        {
+            Console.WriteLine("Func()");
+        }
+    }
+
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            Type type = typeof(MyClass);
+            Attribute[] attributes = Attribute.GetCustomAttributes(type);
+
+            Console.WriteLine("MyClass change history...");
+
+            foreach (Attribute a in attributes)
+            {
+                History h = a as History;
+                if (h != null)
+                    Console.WriteLine("Ver:{0}, Programmer:{1}, Changes{2}",
+                        h.version, h.GetProgrammer(), h.changes);
+            }
+        }
+    }
+}
+
+// 애트리뷰트의 설명 대상
+//     Attribute Target                 설명
+//          All                 이 표의 나머지 모든 요소
+//        Assembly                     어셈블리
+//        Module                       모듈
+//       Interface                    인터페이스
+//        Struct                       구조체
+//      ClassMembers        클래스 안에 선언된 클래스나 구조체를 포함한 클래스의 모든 멤버
+//      Constructor                    생성자
+//        Delegate                     대리자
+//         Enum                        열거형
+//         Event                       이벤트
+//         Field                       필드
+//        Property                    프로퍼티
+//         Method                     메소드
+//        Parameter                메소드의 매개 변수
+//        ReturnValue              메소드의 반환 값
