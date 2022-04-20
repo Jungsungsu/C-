@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Microsoft.Scripting;
+using Microsoft.Scripting.Hosting;
+using IronPython.Hosting;
+
+namespace WithPython
+{
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            ScriptEngine engine = Python.CreateEngine();
+            ScriptScope scope = engine.CreateScope();
+            scope.SetVariable("n", "박상현");
+            scope.SetVariable("p", "010-123-4566");
+
+            ScriptSource source = engine.CreateScriptSourceFromString(
+                @"
+
+class NameCard : // 파이썬 코드에서 클래스를 선
+    name= ''
+    phone= ''
+
+    def _init_(self,name,phone) :
+        self.name = name
+        self.phone = phone
+
+    def printNameCard(self) :
+        print self.name _ ', ' + self.phone
+
+NameCard(n,p)
+");
+            dynamic result = source.Execute(scope);
+            result.printNameCard();
+
+            Console.WriteLine("{0}, {1}", result.name, result.phone);
+        }
+    }
+}
+
+// ScriptRuntime : 동적 언어를 호스팅하는 시작점
+// ScriptScope : 기본적으로 네임스페이스를 나타냅니다
+// ScriptEngine : 스크립트 엔진은 언어의 구문을 나타내는 일꾼입니다.
+// ScriptSource : 이 클래스는 소스 코드를 읽어들이는 여러 메소드와 읽어들인 소스 코드를 다양한 방법으로 실행하는 메소드들을 제공합니다.
+// CompiledCode : 이 클래스는 컴파일된 코드를 나타냅니다. 한번 컴파일해놓고 여러 번 반복해서 실행하는 코드를 나타내는데 사용됩니다.
