@@ -1,0 +1,36 @@
+using System;
+using System.IO;
+
+namespace TextFile
+{
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            StreamWriter sw =
+                new StreamWriter(
+                    new FileStream("a.txt", FileMode.Create));
+
+            sw.WriteLine(int.MaxValue); // Write()와 WriteLine() 메소드는 C#이 제공하는 모든 기본 데이터 형식에 대해 오버로딩 되어 있습니다.
+            sw.WriteLine("Good morning!");
+            sw.WriteLine(uint.MaxValue);
+            sw.WriteLine("안녕하세요!");
+            sw.WriteLine(double.MaxValue);
+
+            sw.Close();
+
+            StreamReader sr =
+                new StreamReader(
+                    new FileStream("a.txt", FileMode.Open));
+
+            Console.WriteLine($"File size : {sr.BaseStream.Length} bytes");
+
+            while (sr.EndOfStream == false) // EndOfStream 프로퍼티는 스트림의 끝에 도달했는지를 알려줍니다.
+            {
+                Console.WriteLine(sr.ReadLine());
+            }
+
+            sr.Close();
+        }
+    }
+}
