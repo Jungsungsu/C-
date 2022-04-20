@@ -1,0 +1,36 @@
+using System;
+using System.IO;
+
+namespace BinaryFile
+{
+    class MainApp
+    {
+        static void Main(string[] args)
+        {
+            BinaryWriter bw =
+                new BinaryWriter(
+                    new FileStream("a.dat", FileMode.Create));
+
+            bw.Write(int.MaxValue);
+            bw.Write("Good morning");
+            bw.Write(uint.MaxValue);
+            bw.Write("안녕하세요!");
+            bw.Write(double.MaxValue);
+
+            bw.Close(); // Close()를 호출하여 내부 스트림을 닫습니다.
+
+            BinaryReader br =
+                new BinaryReader(
+                    new FileStream("a.dat", FileMode.Open));
+
+            Console.WriteLine($"File size : {br.BaseStream.Length} bytes");
+            Console.WriteLine($"{br.ReadInt32()}"); // BinaryReader는 읽을 데이터 형식별로 메소드를 제공합니다.
+            Console.WriteLine($"{br.ReadString()}");
+            Console.WriteLine($"{br.ReadUInt32()}");
+            Console.WriteLine($"{br.ReadString()}");
+            Console.WriteLine($"{br.ReadDouble()}");
+
+            br.Close(); // 스트림을 쓸 때 뿐 아니라 읽을 때 Close() 메소드를 호출하여 내부 스트림을 닫아줘야 한다.
+        }
+    }
+}
