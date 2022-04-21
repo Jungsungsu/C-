@@ -1,0 +1,51 @@
+using System;
+using System.Threading;
+
+namespace UsingThreadState
+{
+    class MainApp
+    {
+        private static void PrintThreadState(ThreadState state)
+        {
+            Console.WriteLine("{0,-16} : {1}", state, (int)state);
+        }
+        
+        static void Main(string[] args)
+        {
+            PrintThreadState(ThreadState.Running);
+
+            PrintThreadState(ThreadState.StopRequested);
+
+            PrintThreadState(ThreadState.SuspendRequested);
+
+            PrintThreadState(ThreadState.Background);
+
+            PrintThreadState(ThreadState.Unstarted);
+
+            PrintThreadState(ThreadState.Stopped);
+
+            PrintThreadState(ThreadState.WaitSleepJoin);
+
+            PrintThreadState(ThreadState.Suspended);
+
+            PrintThreadState(ThreadState.AbortRequested);
+
+            PrintThreadState(ThreadState.Aborted);
+
+            PrintThreadState(ThreadState.Aborted | ThreadState.Stopped);
+        }
+    }
+}
+
+// 스레드의 일생과 상태 변화
+// <상태>
+// 1. Unstarted : 스레드 객체를 생성한 후 Thread.Start() 메소드가 호출되기 전의 상태입니다.
+// 2. Running : 스레드가 시작하여 동작 중인 상태를 나타냅니다. 
+// 3. Suspended : 스레드의 일시 중단 상태를 나타냅니다. 
+// 4. WaitSleepJoin : 스레드가 블록(Block)된 상태를 나타냅니다.
+// 5. Aborted : 스레드가 취소된 상태를 나타냅니다.
+// 6. Stopped : 중지된 스레드의 상태를 나타냅니다.
+// 7. Background : 스레드가 백그라운드로 동작하고 있음을 나타냅니다.
+
+// 비트 필드 : 원래 C언어 등에서 구조체를 선언할 때 바이트 단위가 아닌 비트 단위로 선언한 필드를 말한다.
+
