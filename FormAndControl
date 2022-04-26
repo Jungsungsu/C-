@@ -1,0 +1,43 @@
+using System;
+using System.Windows.Forms;
+
+namespace FormAndControl
+{
+    class MainApp : Form
+    {
+        static void Main(string[] args)
+        {
+            Button button = new Button();
+
+            button.Text = "Click Me!";
+            button.Left = 100;
+            button.Top = 50;
+
+            button.Click +=
+                (object sender, EventArgs e =>
+                {
+                    MessageBox.Show("딸깍!");
+                });
+
+            MainApp form = new MainApp();
+            form.Text = "Form & Control";
+            form.Height = 150;
+
+            form.Controls.Add(button);
+
+            Application.Run(form);
+        }
+    }
+}
+
+// - Form 위에 컨트롤 올리기
+// 윈도우 운영체제는 사용자 인터페이스를 위해 메뉴, 콤보박스, 리스트뷰, 버튼, 텍스트박스등과 같은 표준 컨트롤을 제공합니다.
+// 컨트롤 : 윈도우 운영체제가 제공하는 사용자 인터페이스 요소를 말한다.
+
+// 컨트롤을 폼 위에에 올리는 과정
+// 1. 컨트롤의 인스턴스 생성
+// 2. 컨트롤의 프로퍼티에 값 지정
+// 3. 컨트롤의 이벤트에 이벤트 처리기 등록
+// 4. 폼에 컨트롤 추가
+
+
