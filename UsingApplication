@@ -1,0 +1,31 @@
+using System;
+using System.Windows.Forms;
+
+namespace UsingApplication
+{
+    class MainApp : Form
+    {
+        static void Main(string[] args)
+        {
+            MainApp form = new MainApp();
+
+            form.Click += new EventHandler(
+                (sender, EventArgs) =>
+                {
+                    Console.WriteLine("Closing Window...");
+                    Application.Exit();
+                });
+
+            Console.WriteLine("Starting Window Application...");
+            Application.Run(form);
+
+            Console.WriteLine("Exiting Window Application...");
+        }
+    }
+}
+
+// - Application 클래스 
+// Application 클래스의 역할
+// : 1. 윈도우 응용 프로그램을 시작하고 종료시키는 메소드를 제공하는 것 ( 시작 : Application.Run(), 종료 : Application.Exit() )
+//   2. 윈도우 메시지를 처리하는 것
+                           
