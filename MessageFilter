@@ -1,0 +1,45 @@
+using System;
+using System.Windows.Forms;
+
+namespace MessageFilter
+{
+    class MessageFilter : IMessageFilter
+    {
+        public bool PreFilterMessage(ref Message m)
+        {
+            if (m.Msg == 0x0F || m.Msg == 0xA0 ||
+                m.Msg == 0x200 || m.Msg == 0x113)
+                return false;
+
+            Console.WriteLine($"{m.ToString()} : {m.Msg}");
+
+            if (m.Msg == 0x201)
+                Application.Exit();
+
+            return true;
+        }
+    }
+
+    class MainApp : Form
+    {
+        static void Main(string[] args)
+        {
+            Application.AddMessageFilter(new MessageFilter());
+            Application.Run(new MainApp());
+        }
+    }
+}
+
+// - Application 클래스의 기능
+// 메시지 필터링 : 응용 프로그램이 받고 있는 수많은 메시지 중에 관심 있는 메시지만 걸러낼 수 있다.
+
+// - Messager 구조체의 프로퍼티
+// 1. HWnd : 메시지를 받는 윈도우의 핸들입니다.
+// 2. Msg : 메시지 ID입니다.
+// 3. LParam : 메시지를 처리하는 데 필요한 정보가 담겨 있습니다.
+// 4. WParam : 메시지를 처리하는 데 필요한 부가 정보가 담겨 있습니다.
+// 5. Result : 메시지 처리에 대한 응답으로 윈도우 운영체제에 반환되는 값을 지정합니다.
+
+
+
+
