@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -27,7 +27,7 @@ namespace FileSender
 
             try
             {
-                IPEndPoint clientAddress = new IPEndPoint(0, 0);
+                IPEndPoint clientAddress = new IPEndPoint(0, 0); // IPEndPoint : 클라이언트는 OS에서 할당한 IP 주소와 포트에 바인딩 합니다.
                 IPEndPoint serverAddress =
                     new IPEndPoint(IPAddress.Parse(serverIp), serverPort);
 
@@ -57,9 +57,9 @@ namespace FileSender
 
                 NetworkStream stream = client.GetStream();
 
-                MessageUtil.Send(stream, reqMsg);
+                MessageUtil.Send(stream, reqMsg); // 클라이언트는 서버에 접속하자마자 파일 전송 요청 메시지를 보냅니다.
 
-                Message rspMsg = MessageUtil.Receive(stream);
+                Message rspMsg = MessageUtil.Receive(stream); // 그리고 서버의 응답을 받습니다.
 
                 if (rspMsg.Header.MSGTYPE != CONSTANTS.REP_FILE_SEND)
                 {
@@ -74,7 +74,7 @@ namespace FileSender
                     return;
                 }
 
-                using (Stream fileStream = new FileStream(filepath, FileMode.Open))
+                using (Stream fileStream = new FileStream(filepath, FileMode.Open)) // FileStream : 서버에서 전송 요청을 수락했다면, 파일 스트림을 열어 서버로 보낼 준비를 합니다.
                 {
                     byte[] rbytes = new byte[CHUNK_SIZE];
 
@@ -109,12 +109,12 @@ namespace FileSender
 
                         Console.Write("#");
 
-                        MessageUtil.Send(stream, fileMsg);
+                        MessageUtil.Send(stream, fileMsg); // 모든 파일의 내용이 전송될 때까지 파일 스트림을 0x03 메시지에 담아 서버로 보냅니다.
                     }
 
                     Console.WriteLine();
 
-                    Message rstMsg = MessageUtil.Receive(stream);
+                    Message rstMsg = MessageUtil.Receive(stream); // 서버에서 파일을 제대로 받았는지에 대한 응답을 받습니다.
 
                     BodyResult result = ((BodyResult)rstMsg.Body);
                     Console.WriteLine("파일 전송 성공 : {0}",
